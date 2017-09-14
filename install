@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+
+# Add SELinux policies for per-app nginx configs
+semanage fcontext -a -t httpd_config_t "$DOKKU_ROOT/[^/]+/nginx\.conf\.d(/.*)?"
+semanage fcontext -a -t httpd_config_t "$DOKKU_ROOT/[^/]+/nginx\.conf"
+
