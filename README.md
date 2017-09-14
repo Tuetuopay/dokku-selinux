@@ -14,6 +14,11 @@ Here is a short description of what the plugin does.
 Upon installation, the plugin adds two policies to have the per-app nginx
 configs readable by nginx (i.e. to label them as `httpd_conf_t`).
 
+### Before nginx reload
+
+Every time nginx will reload its config, it will restore the selinux contexts
+for the nginx config files (`nginx.conf` and `nginx.conf.d/`).
+
 ## Licence
 
 Copyright (c) 2017 Tuetuopay
