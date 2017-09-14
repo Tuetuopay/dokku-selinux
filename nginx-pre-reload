@@ -2,9 +2,12 @@
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 
 APP="$1"
+format_restorecon_output () {
+	{ grep '^restorecon reset' || true; } | awk '{ print "           " $3 " : " $5 }'
+}
 
 # Restore SELinux context for nginx config
 echo '       Restoring SELinux context'
-restorecon -v  "$DOKKU_ROOT/$APP/nginx.conf" 2>&1   | { grep '^restorecon reset' || true; } | awk '{ print "           " $3 " : " $5 }'
-restorecon -rv "$DOKKU_ROOT/$APP/nginx.conf.d" 2>&1 | { grep '^restorecon reset' || true; } | awk '{ print "           " $3 " : " $5 }'
+restorecon -v  "$DOKKU_ROOT/$APP/nginx.conf" 2>&1   | format_restorecon_output
+restorecon -rv "$DOKKU_ROOT/$APP/nginx.conf.d" 2>&1 | format_restorecon_output
 
