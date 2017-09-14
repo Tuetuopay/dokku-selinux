@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 
+APP="$1"
+
 # Restore SELinux context for nginx config
 restorecon -v "$DOKKU_ROOT/$APP/nginx.conf"
 restorecon -rv "$DOKKU_ROOT/$APP/nginx.conf.d"
