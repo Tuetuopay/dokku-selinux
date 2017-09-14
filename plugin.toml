@@ -1,0 +1,4 @@
+[plugin]
+description = "SELinux compatibility for Dokku"
+version = "1.0.0"
+[plugin.config]
