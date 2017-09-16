@@ -5,9 +5,12 @@ APP="$1"
 format_restorecon_output () {
 	{ grep '^restorecon reset' || true; } | awk '{ print "           " $3 " : " $5 }'
 }
+clean_stderr () {
+	{ grep -v 'Full path required for exclude' || true; }
+}
 
 # Restore SELinux context for nginx config
 echo '       Restoring SELinux context'
-/usr/sbin/restorecon -v  "$DOKKU_ROOT/$APP/nginx.conf" 2>&1   | format_restorecon_output
-/usr/sbin/restorecon -rv "$DOKKU_ROOT/$APP/nginx.conf.d" 2>&1 | format_restorecon_output
+/usr/sbin/restorecon -v  "$DOKKU_ROOT/$APP/nginx.conf"   |& clean_stderr | format_restorecon_output
+/usr/sbin/restorecon -rv "$DOKKU_ROOT/$APP/nginx.conf.d" |& clean_stderr | format_restorecon_output
 
