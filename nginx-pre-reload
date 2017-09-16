@@ -8,6 +8,6 @@ format_restorecon_output () {
 
 # Restore SELinux context for nginx config
 echo '       Restoring SELinux context'
-restorecon -v  "$DOKKU_ROOT/$APP/nginx.conf" 2>&1   | format_restorecon_output
-restorecon -rv "$DOKKU_ROOT/$APP/nginx.conf.d" 2>&1 | format_restorecon_output
+/usr/sbin/restorecon -v  "$DOKKU_ROOT/$APP/nginx.conf" 2>&1   | format_restorecon_output
+/usr/sbin/restorecon -rv "$DOKKU_ROOT/$APP/nginx.conf.d" 2>&1 | format_restorecon_output
 
