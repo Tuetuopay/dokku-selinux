@@ -12,5 +12,7 @@ clean_stderr () {
 # Restore SELinux context for nginx config
 echo '       Restoring SELinux context'
 /usr/sbin/restorecon -v  "$DOKKU_ROOT/$APP/nginx.conf"   |& clean_stderr | format_restorecon_output
-/usr/sbin/restorecon -rv "$DOKKU_ROOT/$APP/nginx.conf.d" |& clean_stderr | format_restorecon_output
+if [ -d "$DOKKU_ROOT/$APP/nginx.conf.d" ]; then
+	/usr/sbin/restorecon -rv "$DOKKU_ROOT/$APP/nginx.conf.d" |& clean_stderr | format_restorecon_output
+fi
 
