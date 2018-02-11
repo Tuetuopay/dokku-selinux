@@ -21,7 +21,7 @@ for the nginx config files (`nginx.conf` and `nginx.conf.d/`).
 
 ## Licence
 
-Copyright (c) 2017 Tuetuopay
+Copyright (c) 2017-2018 Tuetuopay
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
